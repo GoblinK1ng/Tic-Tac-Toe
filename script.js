@@ -13,10 +13,18 @@ function createPlayer (name){
 
 
 const gameBoard = (function (){
+    let symbols = ["X", "O"];
+    
     let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    const addSymbol = (symbol, positionX, positionY) => {
+    const addSymbol = (positionX, positionY) => {
         console.log(positionX);
-        board[positionX][positionY] = symbol;
+        if (board[positionX][positionY] === 0) {
+            board[positionX][positionY] = symbols[0];
+            let temp = symbols[0];
+            symbols[0] = symbols[1];
+            symbols[1] = temp;
+        }
+        else console.log("Already something there, choose another");
     }
 
     function displayBoard(){
@@ -69,7 +77,7 @@ function game(){
             
             
             if ((playerChoice[0] < 3 && playerChoice[0] >= 0) && 
-            (playerChoice[1] < 3 && playerChoice[1] >= 0)){
+            (playerChoice[1] < 3 && playerChoice[1] >= 0)) {
                 validChoice = true;
             }
             
@@ -79,17 +87,7 @@ function game(){
             }
         }
         
-
-
-        if (lastSymbol === "O"){
-            lastSymbol = "X";
-            gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
-            
-        }
-        else {
-            lastSymbol = "O";
-            gameBoard.addSymbol("O", playerChoice[0], playerChoice[1]);
-        }
+        gameBoard.addSymbol(playerChoice[0], playerChoice[1]);
         
         gameBoard.displayBoard();
         
