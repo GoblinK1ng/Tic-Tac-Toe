@@ -14,6 +14,7 @@ function createPlayer (name){
 
 const gameBoard = (function (){
     let symbols = ["X", "O"];
+    let turns = 0;
     
     let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     const addSymbol = (positionX, positionY) => {
@@ -23,6 +24,8 @@ const gameBoard = (function (){
             let temp = symbols[0];
             symbols[0] = symbols[1];
             symbols[1] = temp;
+
+            turns++;
         }
         else console.log("Already something there, choose another");
     }
@@ -33,6 +36,12 @@ const gameBoard = (function (){
 
     function clearBoard(){
         board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+        turns = 0;
+        symbols = ["X", "O"];
+    }
+
+    function checkTurns(){
+        return turns;
     }
 
     function checkWinner(){
@@ -55,7 +64,7 @@ const gameBoard = (function (){
             return board[2][0];
         }
     }
-    return {displayBoard, addSymbol,checkWinner, clearBoard};
+    return {displayBoard, addSymbol,checkWinner, clearBoard, checkTurns};
 
 
 
@@ -65,10 +74,7 @@ function game(){
     const playerOne = createPlayer("Jack");
     const playerTwo = createPlayer("Meghan");
 
-    //const gameBoard = createGameboard();
-
     let gameLoop = true;
-    let lastSymbol = "O";
     while (gameLoop){
 
         let validChoice = false;
@@ -104,6 +110,11 @@ function game(){
             playerTwo.givePoint();
             gameLoop = false;
         }
+
+        if (gameBoard.checkTurns() >= 9){
+            gameLoop = false;
+            console.log("Tie, no points");
+        } 
         
     }
     gameBoard.clearBoard();
