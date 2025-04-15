@@ -10,17 +10,28 @@ function game(){
     const playerOne = createPlayer("Jack");
     const playerTwo = createPlayer("Meghan");
 
-    function gameBoard(){
-        const gameBoard = Array(3).fill(Array(3).fill(0));
-    
-        console.table(gameBoard);
-    }
+    const gameBoard = createGameboard();
+ 
+    const playerChoice = [prompt("X"), prompt("Y")];
 
-    const playerChoice = prompt();
-    gameBoard();
+    gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
+    
+    console.table(gameBoard.gameBoard);
 
 }
 
+function createGameboard(){
+    const gameBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    const addSymbol = (symbol, positionX, positionY) => {
+        console.log(positionX, positionY);
+        gameBoard[0][0] = symbol;
+        
+    }
+    return {gameBoard, addSymbol};
+
+
+
+}
 
 
 game();
