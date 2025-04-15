@@ -15,10 +15,20 @@ function game(){
     const gameBoard = createGameboard();
 
     let gameLoop = true;
+    let lastSymbol = "O";
     while (gameLoop){
+
         const playerChoice = [prompt("X"), prompt("Y")];
 
-        gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
+        if (lastSymbol === "O"){
+            lastSymbol = "X";
+            gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
+            
+        }
+        else {
+            lastSymbol = "O";
+            gameBoard.addSymbol("O", playerChoice[0], playerChoice[1]);
+        }
         
         console.table(gameBoard.board);
         
