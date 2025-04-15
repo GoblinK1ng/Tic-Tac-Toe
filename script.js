@@ -22,6 +22,7 @@ function game(){
 
         const playerChoice = [prompt("X"), prompt("Y")];
 
+
         if (lastSymbol === "O"){
             lastSymbol = "X";
             gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
@@ -32,7 +33,7 @@ function game(){
             gameBoard.addSymbol("O", playerChoice[0], playerChoice[1]);
         }
         
-        console.table(gameBoard.board);
+        gameBoard.displayBoard();
         
 
         const check = gameBoard.checkWinner();
@@ -62,6 +63,10 @@ function createGameboard(){
         
     }
 
+    function displayBoard(){
+        console.table(board);
+    }
+
     function checkWinner(){
         if (board[1][0] === board[1][1] && board[1][0] === board[1][2] ||
             board[0][1] === board[1][1] && board[0][1] === board[2][1]){
@@ -82,7 +87,7 @@ function createGameboard(){
             return board[2][0];
         }
     }
-    return {board, addSymbol,checkWinner};
+    return {displayBoard, addSymbol,checkWinner};
 
 
 
