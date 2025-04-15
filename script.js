@@ -50,13 +50,15 @@ function game(){
         }
         
     }
+    gameBoard.clearBoard();
+    gameBoard.displayBoard();
 
 }
 
 
 
 function createGameboard(){
-    const board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     const addSymbol = (symbol, positionX, positionY) => {
 
         board[positionX][positionY] = symbol;
@@ -65,6 +67,10 @@ function createGameboard(){
 
     function displayBoard(){
         console.table(board);
+    }
+
+    function clearBoard(){
+        board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     }
 
     function checkWinner(){
@@ -87,7 +93,7 @@ function createGameboard(){
             return board[2][0];
         }
     }
-    return {displayBoard, addSymbol,checkWinner};
+    return {displayBoard, addSymbol,checkWinner, clearBoard};
 
 
 
