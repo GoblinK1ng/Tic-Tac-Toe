@@ -15,9 +15,8 @@ function createPlayer (name){
 const gameBoard = (function (){
     let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     const addSymbol = (symbol, positionX, positionY) => {
-
+        console.log(positionX);
         board[positionX][positionY] = symbol;
-        
     }
 
     function displayBoard(){
@@ -64,7 +63,22 @@ function game(){
     let lastSymbol = "O";
     while (gameLoop){
 
-        const playerChoice = [prompt("X"), prompt("Y")];
+        let validChoice = false;
+        let playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
+        while (!validChoice){
+            
+            if (isNaN(playerChoice[0]) && isNaN(playerChoice[1])){
+                if ((playerChoice[0] < 3 && playerChoice[0] >= 0) && 
+                (playerChoice[1] < 3 && playerChoice[1] >= 0)){
+                    validChoice = true;
+                }
+            }
+
+            else {console.log("Error, not valid inputs");
+                playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
+            }
+        }
+        
 
 
         if (lastSymbol === "O"){
