@@ -10,54 +10,9 @@ function createPlayer (name){
 }
 
 
-function game(){
-    const playerOne = createPlayer("Jack");
-    const playerTwo = createPlayer("Meghan");
-
-    const gameBoard = createGameboard();
-
-    let gameLoop = true;
-    let lastSymbol = "O";
-    while (gameLoop){
-
-        const playerChoice = [prompt("X"), prompt("Y")];
 
 
-        if (lastSymbol === "O"){
-            lastSymbol = "X";
-            gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
-            
-        }
-        else {
-            lastSymbol = "O";
-            gameBoard.addSymbol("O", playerChoice[0], playerChoice[1]);
-        }
-        
-        gameBoard.displayBoard();
-        
-
-        const check = gameBoard.checkWinner();
-
-        if (check === "X"){
-            playerOne.Winner();
-            playerOne.givePoint();
-            gameLoop = false;
-        }
-        else if (check === "O"){
-            playerTwo.Winner();
-            playerTwo.givePoint();
-            gameLoop = false;
-        }
-        
-    }
-    gameBoard.clearBoard();
-    gameBoard.displayBoard();
-
-}
-
-
-
-function createGameboard(){
+const gameBoard = (function (){
     let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
     const addSymbol = (symbol, positionX, positionY) => {
 
@@ -96,6 +51,51 @@ function createGameboard(){
     return {displayBoard, addSymbol,checkWinner, clearBoard};
 
 
+
+})();
+
+function game(){
+    const playerOne = createPlayer("Jack");
+    const playerTwo = createPlayer("Meghan");
+
+    //const gameBoard = createGameboard();
+
+    let gameLoop = true;
+    let lastSymbol = "O";
+    while (gameLoop){
+
+        const playerChoice = [prompt("X"), prompt("Y")];
+
+
+        if (lastSymbol === "O"){
+            lastSymbol = "X";
+            gameBoard.addSymbol("X", playerChoice[0], playerChoice[1]);
+            
+        }
+        else {
+            lastSymbol = "O";
+            gameBoard.addSymbol("O", playerChoice[0], playerChoice[1]);
+        }
+        
+        gameBoard.displayBoard();
+        
+
+        const check = gameBoard.checkWinner();
+
+        if (check === "X"){
+            playerOne.Winner();
+            playerOne.givePoint();
+            gameLoop = false;
+        }
+        else if (check === "O"){
+            playerTwo.Winner();
+            playerTwo.givePoint();
+            gameLoop = false;
+        }
+        
+    }
+    gameBoard.clearBoard();
+    gameBoard.displayBoard();
 
 }
 
