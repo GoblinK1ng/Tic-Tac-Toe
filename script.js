@@ -67,12 +67,12 @@ function game(){
         let playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
         while (!validChoice){
             
-            if (isNaN(playerChoice[0]) && isNaN(playerChoice[1])){
-                if ((playerChoice[0] < 3 && playerChoice[0] >= 0) && 
-                (playerChoice[1] < 3 && playerChoice[1] >= 0)){
-                    validChoice = true;
-                }
+            
+            if ((playerChoice[0] < 3 && playerChoice[0] >= 0) && 
+            (playerChoice[1] < 3 && playerChoice[1] >= 0)){
+                validChoice = true;
             }
+            
 
             else {console.log("Error, not valid inputs");
                 playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
