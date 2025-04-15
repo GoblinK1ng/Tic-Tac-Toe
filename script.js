@@ -34,26 +34,42 @@ function game(){
         
         let countX = 0;
         let countO = 0;
-        for (let x in gameBoard.board){
-            for (let i in gameBoard.board[x]){
-                if (gameBoard.board[x][i] === "X"){
-                    countX++;
-                    console.log(countX);
-                }
-                else if (gameBoard.board[x][i] === "O"){
-                    countO++;
-                    console.log(countO);
-                }
-                
-                if (countX === 3){
-                    gameLoop = false;
-                }
-            }
-            countX = 0;
-            countO = 0;
+
+        const check = checkWinner(gameBoard.board);
+        if (check === "X"){
+            playerOne.givePoint();
+            gameLoop = false;
+            console.log(playerOne.name);
         }
+        else if (check === "O"){
+            playerTwo.givePoint();
+            gameLoop = false;
+            console.log(playerOne.name);
+        }
+        
     }
 
+}
+
+function checkWinner(board){
+    if (board[1][0] === board[1][1] && board[1][0] === board[1][2] ||
+        board[0][1] === board[1][1] && board[0][1] === board[2][1]){
+        return board[1][1];
+    }
+
+    else if (board[0][0] === board[0][1] && board[0][0] === board[0][2] ||
+        board[0][0] === board[1][0] && board[0][0] === board[2][0] ||
+        board[0][0] === board[1][1] && board[0][0] === board[2][2]){
+        return board[0][0];
+    }
+
+    else if (board[0][2] === board[1][2] && board[0][2] === board[2][2] ||
+        board[0][2] === board[1][1] && board[0][2] === board[2][0]){
+        return board[0][2];
+    }
+    else if (board[2][0] === board[2][1] && board[2][0] === board[2][2]){
+        return board[2][0];
+    }
 }
 
 function createGameboard(){
