@@ -1,7 +1,3 @@
-const Players = function (name){
-    this.name = name;
-}
-
-function createUser (name){
+function createPlayer (name){
     return {name};
 }
