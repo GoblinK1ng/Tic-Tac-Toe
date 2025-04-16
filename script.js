@@ -104,8 +104,8 @@ const gameBoard = (function (){
 })();
 
 const game = (function(){
-    const playerOne = createPlayer("Jack");
-    const playerTwo = createPlayer("Meghan");
+    const playerOne = createPlayer(prompt("What is playerOnes name"));
+    const playerTwo = createPlayer(prompt("What is playerTwos name"));
     
     function displayWinner(){
         const check = gameBoard.checkWinner();
