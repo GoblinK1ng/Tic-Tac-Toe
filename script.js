@@ -21,9 +21,11 @@ const gameBoard = (function (){
     let symbols = ["X", "O"];
     let turns = 0;
     
+    
     let board = [["", "", ""], ["", "", ""], ["", "", ""]];
     const addSymbol = (positionX, positionY) => {
-        console.log(positionX);
+        
+        
         if (board[positionX][positionY] === "") {
             board[positionX][positionY] = symbols[0];
             let temp = symbols[0];
@@ -31,6 +33,11 @@ const gameBoard = (function (){
             symbols[1] = temp;
 
             turns++;
+
+            gameBoard.displayBoard();
+            if (gameBoard.checkWinner() !== ""){
+                game.displayWinner();
+            }
         }
         else console.log("Already something there, choose another");
     }
@@ -38,11 +45,22 @@ const gameBoard = (function (){
     function displayBoard(){
         console.table(board);
         gameboardContainer.innerHTML = '';
+        let count = 0;
+
         for (let x = 0; x < board.length; x++){
             for (let y = 0; y < board[x].length; y++){
+
                 const square = document.createElement("div");
                 square.classList = "square";
+                square.id = count;
+
+                count++;
+
                 square.textContent = board[x][y];
+                square.addEventListener("click", () => {
+                    
+                    gameBoard.addSymbol(Math.floor(square.id / 3) , Math.ceil(square.id%3));
+                })
 
                 gameboardContainer.appendChild(square);
             }
@@ -50,7 +68,7 @@ const gameBoard = (function (){
     }
 
     function clearBoard(){
-        board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+        board = [["", "", ""], ["", "", ""], ["", "", ""]];
         turns = 0;
         symbols = ["X", "O"];
     }
@@ -85,40 +103,16 @@ const gameBoard = (function (){
 
 })();
 
-function game(){
+const game = (function(){
     const playerOne = createPlayer("Jack");
     const playerTwo = createPlayer("Meghan");
     
-    let gameLoop = true;
-    while (gameLoop){
-
-        let validChoice = false;
-        let playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
-        while (!validChoice){
-            
-            
-            if ((playerChoice[0] < 3 && playerChoice[0] >= 0) && 
-            (playerChoice[1] < 3 && playerChoice[1] >= 0)) {
-                validChoice = true;
-            }
-            
-
-            else {console.log("Error, not valid inputs");
-                playerChoice = [prompt("X Coordinate"), prompt("Y Coordinate")];
-            }
-        }
-        
-        gameBoard.addSymbol(playerChoice[0], playerChoice[1]);
-        
-        gameBoard.displayBoard();
-        
-
+    function displayWinner(){
         const check = gameBoard.checkWinner();
-
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
             gameBoard.clearBoard();
             gameBoard.displayBoard();
-
+    
     
             if (check === "X") {
                 playerOne.Winner();
@@ -138,17 +132,11 @@ function game(){
             console.log(playerOne.getName() + " has "+playerOne.getPoints() + " Points");
             console.log(playerTwo.getName() + " has "+playerTwo.getPoints() + " Points");
             
-
+    
         }
-    
-        
     }
-    
-    
+    return{displayWinner};
 
-}
+})();
 
-
-game();
-
-//gameBoard.displayBoard();
+gameBoard.displayBoard();
