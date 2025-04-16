@@ -5,6 +5,7 @@ const resetPoints = document.querySelector(".resetPoints");
 
 startButton.addEventListener("click", () =>{
     game.resetGamePlayers();
+    gameBoard.clearBoard();
     gameBoard.displayBoard();
 })
 
