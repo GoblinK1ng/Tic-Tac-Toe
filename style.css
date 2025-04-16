@@ -2,3 +2,21 @@
   margin: 0;
   font-family: 'Courier New', Courier, monospace;
 }
+
+
+
+.gameBoard{
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.square{
+  border: 1px solid black;
+}
+
+.square:hover{
+  background-color: grey;
+}

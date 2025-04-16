@@ -40,7 +40,7 @@ const gameBoard = (function (){
         for (let x = 0; x < board.length; x++){
             for (let y = 0; y < board[x].length; y++){
                 const square = document.createElement("div");
-                square.id = "square";
+                square.classList = "square";
                 square.textContent = board[x][y];
 
                 gameboardContainer.appendChild(square);
