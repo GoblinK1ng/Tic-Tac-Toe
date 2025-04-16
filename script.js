@@ -1,4 +1,5 @@
 const gameboardContainer = document.querySelector(".gameBoard");
+const gameboardContainerBig = document.querySelector(".gameboard-container");
 const startButton = document.querySelector(".start");
 const resetBoard = document.querySelector(".resetBoard");
 const resetPoints = document.querySelector(".resetPoints");
@@ -94,6 +95,8 @@ const gameBoard = (function (){
         board = [["", "", ""], ["", "", ""], ["", "", ""]];
         turns = 0;
         symbols = ["X", "O"];
+        const child = document.getElementById("blocker");
+        gameboardContainerBig.removeChild(child);
     }
 
     function checkTurns(){
@@ -198,8 +201,9 @@ const game = (function(){
     function displayWinner(check){
         
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
-            
-    
+            const blocker = document.createElement("div");
+            blocker.id = "blocker";
+            gameboardContainerBig.appendChild(blocker);
     
             if (check === "X") {
                 playerOne.Winner();
