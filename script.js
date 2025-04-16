@@ -198,6 +198,7 @@ const game = (function(){
     }
     
     
+
     function displayWinner(check){
         
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
