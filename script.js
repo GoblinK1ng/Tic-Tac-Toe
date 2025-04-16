@@ -1,3 +1,4 @@
+const main = document.querySelector(".main-container");
 const gameboardContainer = document.querySelector(".gameBoard");
 const gameboardContainerBig = document.querySelector(".gameboard-container");
 const startButton = document.querySelector(".start");
@@ -95,8 +96,10 @@ const gameBoard = (function (){
         board = [["", "", ""], ["", "", ""], ["", "", ""]];
         turns = 0;
         symbols = ["X", "O"];
-        const child = document.getElementById("blocker");
-        gameboardContainerBig.removeChild(child);
+        const child1 = document.getElementById("blocker");
+        gameboardContainerBig.removeChild(child1);
+        const child2 = document.getElementById("result");
+        if (child2 !== null) main.removeChild(child2);
     }
 
     function checkTurns(){
@@ -205,14 +208,14 @@ const game = (function(){
             const blocker = document.createElement("div");
             blocker.id = "blocker";
             gameboardContainerBig.appendChild(blocker);
-    
+            
+            const result = document.createElement("div");
+
             if (check === "X") {
-                playerOne.Winner();
-                playerOne.givePoint();
+                game.showResults(playerOne);
             }
             else if (check === "O"){
-                playerTwo.Winner();
-                playerTwo.givePoint();
+                game.showResults(playerTwo);
             }
     
             else if (gameBoard.checkTurns() >= 9){
@@ -226,6 +229,14 @@ const game = (function(){
     
         }
     }
-    return{displayWinner, resetGamePlayers, resetPoints};
+
+    function showResults(player){
+        const result = document.createElement("div");
+        result.id = "result";
+        result.textContent = player.getName() + " Has Won";
+        player.givePoint();
+        main.appendChild(result);
+    }
+    return{showResults, displayWinner, resetGamePlayers, resetPoints};
 
 })();
