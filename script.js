@@ -118,7 +118,7 @@ const gameBoard = (function (){
 
         if (posX === 0){
             console.log(posX);
-            if ((board[posX][posY] === board[posX+1][posY]) || 
+            if ((board[posX][posY] === board[posX+1][posY]) && 
             (board[posX][posY] === board[posX+2][posY])) return board[posX][posY];
             
         }
