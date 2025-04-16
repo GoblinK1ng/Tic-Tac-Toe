@@ -1,12 +1,15 @@
 function createPlayer (name){
     let points = 0;
+    
 
     const givePoint = () => points++;
+    const getPoints = () => points;
+    const getName = () => name;
     const Winner = () => {
         console.log(name + " is the Winner, gains one point");
         
     }
-    return {name, givePoint, Winner};
+    return {getName, givePoint, Winner, getPoints};
 }
 
 
@@ -103,6 +106,7 @@ function game(){
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
             gameBoard.clearBoard();
             gameBoard.displayBoard();
+
     
             if (check === "X") {
                 playerOne.Winner();
@@ -117,8 +121,12 @@ function game(){
                 console.log("Tie, no points");
             } 
             
-            gameLoop = confirm("Want to play again?")
             
+            gameLoop = confirm("Want to play again?")
+            console.log(playerOne.getName() + " has "+playerOne.getPoints() + " Points");
+            console.log(playerTwo.getName() + " has "+playerTwo.getPoints() + " Points");
+            
+
         }
     
         
