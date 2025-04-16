@@ -24,7 +24,7 @@ const gameBoard = (function (){
     let board = [["", "", ""], ["", "", ""], ["", "", ""]];
     const addSymbol = (positionX, positionY) => {
         console.log(positionX);
-        if (board[positionX][positionY] === 0) {
+        if (board[positionX][positionY] === "") {
             board[positionX][positionY] = symbols[0];
             let temp = symbols[0];
             symbols[0] = symbols[1];
@@ -37,6 +37,7 @@ const gameBoard = (function (){
 
     function displayBoard(){
         console.table(board);
+        gameboardContainer.innerHTML = '';
         for (let x = 0; x < board.length; x++){
             for (let y = 0; y < board[x].length; y++){
                 const square = document.createElement("div");
@@ -148,6 +149,6 @@ function game(){
 }
 
 
-//game();
+game();
 
-gameBoard.displayBoard();
+//gameBoard.displayBoard();
