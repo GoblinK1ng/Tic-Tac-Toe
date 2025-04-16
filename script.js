@@ -37,9 +37,10 @@ const gameBoard = (function (){
             turns++;
 
             gameBoard.displayBoard();
-            console.log(gameBoard.checkWinner());
-            if (gameBoard.checkWinner() !== ""){
-                game.displayWinner();
+            let winner = gameBoard.checkWinner(positionX,positionY)
+            if (winner !== null){
+                
+                game.displayWinner(winner);
                 
             }
         }
@@ -81,8 +82,57 @@ const gameBoard = (function (){
         return turns;
     }
 
-    function checkWinner(){
-        if (board[1][0] === board[1][1] && board[1][0] === board[1][2] ||
+    function checkWinner(posX, posY){
+        /*for (let i = 0; i < 3; i++){
+            if ((board[i][0] === board[i][1]) || 
+            (board[i][0] === board[i][2])) return board[posX][posY];
+        }
+        for (let i = 0; i < 3; i++){
+            if ((board[0][i] === board[1][i]) || 
+            (board[0][i] === board[2][i])) return board[posX][posY];
+        }*/
+
+
+
+
+        if (posX === 0){
+            console.log(posX);
+            if ((board[posX][posY] === board[posX+1][posY]) || 
+            (board[posX][posY] === board[posX+2][posY])) return board[posX][posY];
+            
+        }
+        else if (posX === 1){
+            if ((board[posX][posY] === board[posX+1][posY]) && 
+            (board[posX][posY] === board[posX-1][posY])) return board[posX][posY];
+
+        }
+        else if (posX === 2){
+            
+            if ((board[posX][posY] === board[posX-1][posY]) && 
+            (board[posX][posY] === board[posX-2][posY])) return board[posX][posY];
+        }
+
+        if (posY === 0){
+            if ((board[posX][posY] === board[posX][posY+1]) && 
+            (board[posX][posY] === board[posX][posY+2])) return board[posX][posY];
+        }
+        else if (posY === 1){
+            if ((board[posX][posY] === board[posX][posY-1]) && 
+            (board[posX][posY] === board[posX][posY+1])) return board[posX][posY];
+        }
+        else if (posY === 2){
+            if ((board[posX][posY] === board[posX][posY-1]) && 
+            (board[posX][posY] === board[posX][posY-2])) return board[posX][posY];
+        }
+
+        if (board[0][0] === board[1][1] && board[0][0] === board[2][2] ||
+            board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
+                if (board[1][1] !== "") return board[posX][posY];
+            }
+        return null;
+        
+
+        /*if (board[1][0] === board[1][1] && board[1][0] === board[1][2] ||
             board[0][1] === board[1][1] && board[0][1] === board[2][1]){
                 if (board[1][1] !== "") return board[1][1];
                 
@@ -103,7 +153,7 @@ const gameBoard = (function (){
         if (board[2][0] === board[2][1] && board[2][0] === board[2][2]){
                 
             if (board[2][0] !== "") return board[2][0];
-        }
+        }*/
     }
     return {displayBoard, addSymbol,checkWinner, clearBoard, checkTurns};
 
@@ -123,8 +173,8 @@ const game = (function(){
     }   
     
     
-    function displayWinner(){
-        const check = gameBoard.checkWinner();
+    function displayWinner(check){
+        
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
             gameBoard.clearBoard();
             gameBoard.displayBoard();
