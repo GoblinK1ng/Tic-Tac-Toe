@@ -1,15 +1,20 @@
 const gameboardContainer = document.querySelector(".gameBoard");
 const startButton = document.querySelector(".start");
-const resetButton = document.querySelector(".resetBoard");
+const resetBoard = document.querySelector(".resetBoard");
+const resetPoints = document.querySelector(".resetPoints");
 
 startButton.addEventListener("click", () =>{
     game.resetGamePlayers();
     gameBoard.displayBoard();
 })
 
-resetButton.addEventListener("click", () =>{
+resetBoard.addEventListener("click", () =>{
     gameBoard.clearBoard();
     gameBoard.displayBoard();
+})
+
+resetPoints.addEventListener("click", () =>{
+    game.resetPoints();
 })
 
 function createPlayer (name){
@@ -180,9 +185,13 @@ const game = (function(){
     function resetGamePlayers(){
         playerOne.changeName(prompt("What is Player One's Name"));
         playerTwo.changeName(prompt("What is Player Two's Name"));
+        resetPoints();
+    }   
+
+    function resetPoints(){
         playerOne.resetPoints();
         playerTwo.resetPoints();
-    }   
+    }
     
     
     function displayWinner(check){
@@ -219,6 +228,6 @@ const game = (function(){
     
         }
     }
-    return{displayWinner, resetGamePlayers};
+    return{displayWinner, resetGamePlayers, resetPoints};
 
 })();
