@@ -1,4 +1,16 @@
 const gameboardContainer = document.querySelector(".gameBoard");
+const startButton = document.querySelector(".start");
+const resetButton = document.querySelector(".resetBoard");
+
+startButton.addEventListener("click", () =>{
+    game.resetGamePlayers();
+    gameBoard.displayBoard();
+})
+
+resetButton.addEventListener("click", () =>{
+    gameBoard.clearBoard();
+    gameBoard.displayBoard();
+})
 
 function createPlayer (name){
     let points = 0;
@@ -210,6 +222,3 @@ const game = (function(){
     return{displayWinner, resetGamePlayers};
 
 })();
-
-game.resetGamePlayers();
-gameBoard.displayBoard();
