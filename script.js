@@ -73,7 +73,7 @@ const gameBoard = (function (){
 function game(){
     const playerOne = createPlayer("Jack");
     const playerTwo = createPlayer("Meghan");
-
+    
     let gameLoop = true;
     while (gameLoop){
 
@@ -100,25 +100,31 @@ function game(){
 
         const check = gameBoard.checkWinner();
 
-        if (check === "X"){
-            playerOne.Winner();
-            playerOne.givePoint();
-            gameLoop = false;
+        if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
+            gameBoard.clearBoard();
+            gameBoard.displayBoard();
+    
+            if (check === "X") {
+                playerOne.Winner();
+                playerOne.givePoint();
+            }
+            else if (check === "O"){
+                playerTwo.Winner();
+                playerTwo.givePoint();
+            }
+    
+            else if (gameBoard.checkTurns() >= 9){
+                console.log("Tie, no points");
+            } 
+            
+            gameLoop = confirm("Want to play again?")
+            
         }
-        else if (check === "O"){
-            playerTwo.Winner();
-            playerTwo.givePoint();
-            gameLoop = false;
-        }
-
-        if (gameBoard.checkTurns() >= 9){
-            gameLoop = false;
-            console.log("Tie, no points");
-        } 
+    
         
     }
-    gameBoard.clearBoard();
-    gameBoard.displayBoard();
+    
+    
 
 }
 
