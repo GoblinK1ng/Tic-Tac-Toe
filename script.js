@@ -197,8 +197,7 @@ const game = (function(){
     function displayWinner(check){
         
         if ((check === "X") || (check === "O") || (gameBoard.checkTurns() >= 9)){
-            gameBoard.clearBoard();
-            gameBoard.displayBoard();
+            
     
     
             if (check === "X") {
@@ -214,13 +213,6 @@ const game = (function(){
                 console.log("Tie, no points");
             } 
             
-            
-            if (confirm("Want to play again?")){
-                let resetPlayers = confirm("Do you want to reset the score?");
-                if (resetPlayers){
-                    resetGamePlayers();
-                }
-            }
             
             console.log(playerOne.getName() + " has "+playerOne.getPoints() + " Points");
             console.log(playerTwo.getName() + " has "+playerTwo.getPoints() + " Points");
