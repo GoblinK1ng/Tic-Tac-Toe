@@ -1,3 +1,5 @@
+const gameboardContainer = document.querySelector(".gameBoard");
+
 function createPlayer (name){
     let points = 0;
     
@@ -19,7 +21,7 @@ const gameBoard = (function (){
     let symbols = ["X", "O"];
     let turns = 0;
     
-    let board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    let board = [["", "", ""], ["", "", ""], ["", "", ""]];
     const addSymbol = (positionX, positionY) => {
         console.log(positionX);
         if (board[positionX][positionY] === 0) {
@@ -35,6 +37,15 @@ const gameBoard = (function (){
 
     function displayBoard(){
         console.table(board);
+        for (let x = 0; x < board.length; x++){
+            for (let y = 0; y < board[x].length; y++){
+                const square = document.createElement("div");
+                square.id = "square";
+                square.textContent = board[x][y];
+
+                gameboardContainer.appendChild(square);
+            }
+        }
     }
 
     function clearBoard(){
@@ -137,4 +148,6 @@ function game(){
 }
 
 
-game();
+//game();
+
+gameBoard.displayBoard();
