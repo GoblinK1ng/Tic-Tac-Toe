@@ -20,20 +20,23 @@ resetPoints.addEventListener("click", () =>{
     game.resetPoints();
 })
 
-function createPlayer (name){
-    let points = 0;
-    
+class Player {
 
-    const givePoint = () => points++;
-    const resetPoints = () => points = 0;
-    const getPoints = () => points;
-    const getName = () => name;
-    const changeName = (newName) => name = newName;
-    const Winner = () => {
-        console.log(name + " is the Winner, gains one point");
+    constructor(name){
+        this._name = name;
+        this._points = 0;
+    }
+
+    givePoint = () => this._points++;
+    resetPoints = () => this._points = 0;
+    get points() {return this._points}
+    get name() {this._name}
+    set name(newName) {this._name = newName}
+    Winner = () => {
+        console.log(this._name + " is the Winner, gains one point");
         
     }
-    return {changeName, getName, givePoint, Winner, getPoints, resetPoints};
+    
 }
 
 
@@ -186,12 +189,12 @@ const gameBoard = (function (){
 })();
 
 const game = (function(){
-    const playerOne = createPlayer("Player One");
-    const playerTwo = createPlayer("Player Two");
+    const playerOne = new Player("Player One");
+    const playerTwo = new Player("Player Two");
     
     function resetGamePlayers(){
-        playerOne.changeName(prompt("What is Player One's Name"));
-        playerTwo.changeName(prompt("What is Player Two's Name"));
+        playerOne.name = (prompt("What is Player One's Name"));
+        playerTwo.name = (prompt("What is Player Two's Name"));
         resetPoints();
     }   
 
@@ -223,8 +226,8 @@ const game = (function(){
             } 
             
             
-            console.log(playerOne.getName() + " has "+playerOne.getPoints() + " Points");
-            console.log(playerTwo.getName() + " has "+playerTwo.getPoints() + " Points");
+            console.log(playerOne.name + " has "+playerOne.points + " Points");
+            console.log(playerTwo.name + " has "+playerTwo.points + " Points");
             
     
         }
@@ -233,7 +236,7 @@ const game = (function(){
     function showResults(player){
         const result = document.createElement("div");
         result.id = "result";
-        result.textContent = player.getName() + " Has Won";
+        result.textContent = player.name + " Has Won";
         player.givePoint();
         main.appendChild(result);
     }
